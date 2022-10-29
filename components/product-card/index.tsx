@@ -23,9 +23,7 @@ const ProductCard: NextPage<IProductCard> = ({ product }) => {
         <p>{product.name}</p>
         <p>{product.brand}</p>
         <p>${product.price}</p>
-        <button className="bg-yellow-300 px-3 py-2 rounded-md hover:bg-yellow-400 font-light">
-          Add to card
-        </button>
+        <button className="primary-btn">Add to card</button>
       </div>
     </div>
   );
