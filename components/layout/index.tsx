@@ -1,7 +1,8 @@
 import { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
-import { ReactNode } from 'react';
+import { ReactNode, useContext } from 'react';
+import { AppContext } from '../../context/context';
 
 interface ILayout {
   title?: string;
@@ -9,6 +10,13 @@ interface ILayout {
 }
 
 const Layout: NextPage<ILayout> = ({ title, children }) => {
+  const { state } = useContext(AppContext);
+  const { cartItems } = state.cart;
+
+  const getCartCount = () => {
+    return cartItems.reduce((qty, item) => Number(item.quantity) + qty, 0);
+  };
+
   return (
     <>
       <Head>
@@ -24,7 +32,14 @@ const Layout: NextPage<ILayout> = ({ title, children }) => {
             </Link>
             <div className="flex gap-3">
               <Link href="/cart">
-                <a>Cart</a>
+                <a>
+                  Cart
+                  {cartItems.length > 0 && (
+                    <span className="ml-1 rounded-full bg-yellow-400 px-2 py-1 text-xs font-bold text-white">
+                      {getCartCount()}
+                    </span>
+                  )}
+                </a>
               </Link>
               <Link href="/login">
                 <a>Login</a>

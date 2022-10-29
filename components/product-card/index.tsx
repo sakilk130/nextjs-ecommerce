@@ -1,10 +1,22 @@
 import { NextPage } from 'next';
 import Link from 'next/link';
+import { useContext } from 'react';
+import { AppContext } from '../../context/context';
+import { Types } from '../../context/type';
 import { IProduct } from '../../interface';
 interface IProductCard {
   product: IProduct;
 }
 const ProductCard: NextPage<IProductCard> = ({ product }) => {
+  const { dispatch } = useContext(AppContext);
+
+  const handleAddToCart = () => {
+    dispatch({
+      type: Types.CART_TO_CART,
+      payload: { ...product, quantity: 1 },
+    });
+  };
+
   return (
     <div className="card">
       <Link href={`/product/${product.slug}`}>
@@ -23,7 +35,13 @@ const ProductCard: NextPage<IProductCard> = ({ product }) => {
         <p>{product.name}</p>
         <p>{product.brand}</p>
         <p>${product.price}</p>
-        <button className="primary-btn">Add to card</button>
+        <button
+          className="primary-btn"
+          onClick={handleAddToCart}
+          disabled={product.countInStock === 0}
+        >
+          Add to card
+        </button>
       </div>
     </div>
   );
