@@ -28,6 +28,16 @@ export const reducer = (state: InitialStateType, action: any) => {
         },
       };
     }
+    case Types.REMOVE_FROM_CART: {
+      const slug = action.payload;
+      return {
+        ...state,
+        cart: {
+          ...state.cart,
+          cartItems: state.cart.cartItems.filter((item) => item.slug !== slug),
+        },
+      };
+    }
     default:
       return state;
   }
