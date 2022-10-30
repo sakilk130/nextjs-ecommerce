@@ -8,9 +8,17 @@ interface IProductCard {
   product: IProduct;
 }
 const ProductCard: NextPage<IProductCard> = ({ product }) => {
-  const { dispatch } = useContext(AppContext);
+  const { state, dispatch } = useContext(AppContext);
 
   const handleAddToCart = () => {
+    const existItem = state.cart.cartItems.find(
+      (x) => x.slug === product?.slug
+    );
+    const quantity = existItem ? existItem.quantity + 1 : 1;
+    if (product && product?.countInStock < quantity) {
+      window.alert('Sorry. Product is out of stock');
+      return;
+    }
     dispatch({
       type: Types.CART_TO_CART,
       payload: { ...product, quantity: 1 },

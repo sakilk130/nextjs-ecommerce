@@ -9,12 +9,20 @@ import data from '../../utils/data';
 
 const ProductDetails = () => {
   const { query } = useRouter();
-  const { dispatch } = useContext(AppContext);
+  const { state, dispatch } = useContext(AppContext);
 
   const { slug } = query;
   const product = data.products.find((a) => a.slug === slug);
 
   const handleAddToCart = () => {
+    const existItem = state.cart.cartItems.find(
+      (x) => x.slug === product?.slug
+    );
+    const quantity = existItem ? existItem.quantity + 1 : 1;
+    if (product && product?.countInStock < quantity) {
+      window.alert('Sorry. Product is out of stock');
+      return;
+    }
     dispatch({
       type: Types.CART_TO_CART,
       payload: { ...product, quantity: 1 },
