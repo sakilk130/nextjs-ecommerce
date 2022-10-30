@@ -1,13 +1,33 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useContext } from 'react';
 import Layout from '../../components/layout';
+import { AppContext } from '../../context/context';
+import { Types } from '../../context/type';
 import data from '../../utils/data';
 
 const ProductDetails = () => {
   const { query } = useRouter();
+  const { state, dispatch } = useContext(AppContext);
+
   const { slug } = query;
   const product = data.products.find((a) => a.slug === slug);
+
+  const handleAddToCart = () => {
+    const existItem = state.cart.cartItems.find(
+      (x) => x.slug === product?.slug
+    );
+    const quantity = existItem ? existItem.quantity + 1 : 1;
+    if (product && product?.countInStock < quantity) {
+      window.alert('Sorry. Product is out of stock');
+      return;
+    }
+    dispatch({
+      type: Types.CART_TO_CART,
+      payload: { ...product, quantity: 1 },
+    });
+  };
 
   if (!product) {
     return <Layout title="product not found">Product Not Found</Layout>;
@@ -54,6 +74,7 @@ const ProductDetails = () => {
               <button
                 className="primary-btn w-full mt-4"
                 disabled={product.countInStock === 0}
+                onClick={handleAddToCart}
               >
                 Add to cart
               </button>
