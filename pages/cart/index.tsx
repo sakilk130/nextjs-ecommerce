@@ -23,6 +23,11 @@ const Cart = () => {
     dispatch({ type: Types.REMOVE_FROM_CART, payload: slug });
   };
 
+  const updateCartHandler = (item: any, qty: any) => {
+    const quantity = Number(qty);
+    dispatch({ type: Types.CART_TO_CART, payload: { ...item, quantity } });
+  };
+
   return (
     <Layout title="Shopping Cart">
       <h1 className="text-xl">Shopping Cart</h1>
@@ -61,7 +66,20 @@ const Cart = () => {
                         <a className="ml-3">{item.name}</a>
                       </Link>
                     </td>
-                    <td className="p-3 text-start">{item.quantity}</td>
+                    <td className="p-3 text-start">
+                      <select
+                        value={item.quantity}
+                        onChange={(e) =>
+                          updateCartHandler(item, e.target.value)
+                        }
+                      >
+                        {[...Array(item.countInStock).keys()].map((x) => (
+                          <option key={x + 1} value={x + 1}>
+                            {x + 1}
+                          </option>
+                        ))}
+                      </select>
+                    </td>
                     <td className="p-3 text-start">
                       ${item.price * item.quantity}
                     </td>
