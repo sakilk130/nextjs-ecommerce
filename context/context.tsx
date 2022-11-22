@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie';
 import { createContext, useReducer } from 'react';
 import { IProduct } from '../interface';
 import { reducer } from './reducer';
@@ -13,9 +14,9 @@ export type InitialStateType = {
 };
 
 const initialState = {
-  cart: {
-    cartItems: [],
-  },
+  cart: Cookies.get('cart')
+    ? JSON.parse(Cookies.get('cart') || '')
+    : { cartItems: [] },
 };
 
 export const AppContext = createContext<{
