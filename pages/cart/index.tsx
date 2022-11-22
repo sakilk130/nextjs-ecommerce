@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -116,4 +117,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default dynamic(() => Promise.resolve(Cart), { ssr: false });
