@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie';
 import { InitialStateType } from './context';
 import { Types } from './type';
 
@@ -8,35 +9,20 @@ export const reducer = (state: InitialStateType, action: any) => {
       const existItem = state.cart.cartItems.find(
         (item) => item.slug === newItem.slug
       );
-      if (existItem) {
-        return {
-          ...state,
-          cart: {
-            cartItems: state.cart.cartItems.map((item) =>
-              item.slug === existItem.slug
-                ? { ...existItem, quantity: existItem.quantity + 1 }
-                : item
-            ),
-          },
-        };
-      }
-      return {
-        ...state,
-        cart: {
-          ...state.cart,
-          cartItems: [...state.cart.cartItems, newItem],
-        },
-      };
+      const cartItems = existItem
+        ? state.cart.cartItems.map((item) =>
+            item.name === existItem.name ? newItem : item
+          )
+        : [...state.cart.cartItems, newItem];
+      Cookies.set('cart', JSON.stringify({ ...state.cart, cartItems }));
+      return { ...state, cart: { ...state.cart, cartItems } };
     }
     case Types.REMOVE_FROM_CART: {
-      const slug = action.payload;
-      return {
-        ...state,
-        cart: {
-          ...state.cart,
-          cartItems: state.cart.cartItems.filter((item) => item.slug !== slug),
-        },
-      };
+      const cartItems = state.cart.cartItems.filter(
+        (item) => item.slug !== action.payload
+      );
+      Cookies.set('cart', JSON.stringify({ ...state.cart, cartItems }));
+      return { ...state, cart: { ...state.cart, cartItems } };
     }
     default:
       return state;
