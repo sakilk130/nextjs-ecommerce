@@ -27,7 +27,7 @@ export default NextAuth({
         email: { label: 'email', type: 'email' },
         password: { label: 'Password', type: 'password' },
       },
-      async authorize(credentials) {
+      async authorize(credentials: any) {
         await db.connect();
         const user = await User.findOne({
           email: credentials.email,
