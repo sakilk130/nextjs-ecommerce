@@ -1,7 +1,10 @@
 import { NextPage } from 'next';
+import { useSession } from 'next-auth/react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { ReactNode, useContext, useEffect, useState } from 'react';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { AppContext } from '../../context/context';
 
 interface ILayout {
@@ -10,6 +13,7 @@ interface ILayout {
 }
 
 const Layout: NextPage<ILayout> = ({ title, children }) => {
+  const { status, data: session } = useSession();
   const { state } = useContext(AppContext);
   const { cartItems } = state.cart;
   const [cartItemsCount, setCartItemsCount] = useState(0);
@@ -27,6 +31,7 @@ const Layout: NextPage<ILayout> = ({ title, children }) => {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="description" content="E-commerce" />
       </Head>
+      <ToastContainer position="bottom-center" limit={1} />
       <div className="flex min-h-screen flex-col justify-between ">
         <header className="shadow-md">
           <nav className="flex justify-between gap-3 p-5">
@@ -44,9 +49,15 @@ const Layout: NextPage<ILayout> = ({ title, children }) => {
                   )}
                 </a>
               </Link>
-              <Link href="/login">
-                <a>Login</a>
-              </Link>
+              {status === 'loading' ? (
+                'Loading...'
+              ) : session?.user ? (
+                session.user.name
+              ) : (
+                <Link href="/login">
+                  <a>Login</a>
+                </Link>
+              )}
             </div>
           </nav>
         </header>
