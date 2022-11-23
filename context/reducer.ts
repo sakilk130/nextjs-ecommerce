@@ -24,6 +24,14 @@ export const reducer = (state: InitialStateType, action: any) => {
       Cookies.set('cart', JSON.stringify({ ...state.cart, cartItems }));
       return { ...state, cart: { ...state.cart, cartItems } };
     }
+    case Types.RESET_CART: {
+      return {
+        ...state,
+        cart: {
+          cartItems: [],
+        },
+      };
+    }
     default:
       return state;
   }
