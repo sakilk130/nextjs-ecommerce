@@ -16,6 +16,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@headlessui/react": "^1.6.2",
     "bcryptjs": "^2.4.3",
     "js-cookie": "^3.0.1",
     "mongoose": "^6.7.2",
