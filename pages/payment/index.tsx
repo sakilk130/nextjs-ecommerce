@@ -37,7 +37,8 @@ const Payment = () => {
 
   useEffect(() => {
     if (!shippingAddress.address) {
-      return router.push('/shipping');
+      router.push('/shipping');
+      return;
     }
     setPayment(paymentMethod || '');
   }, [paymentMethod, router, shippingAddress.address]);
