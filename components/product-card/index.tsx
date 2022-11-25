@@ -1,41 +1,45 @@
+import axios from 'axios';
 import { NextPage } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useContext } from 'react';
+import { toast } from 'react-toastify';
 import { AppContext } from '../../context/context';
 import { Types } from '../../context/type';
-import { IProduct } from '../../interface';
-interface IProductCard {
-  product: IProduct;
-}
-const ProductCard: NextPage<IProductCard> = ({ product }) => {
+
+const ProductCard: NextPage<any> = ({ product }) => {
   const { state, dispatch } = useContext(AppContext);
 
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
     const existItem = state.cart.cartItems.find(
       (x) => x.slug === product?.slug
     );
     const quantity = existItem ? existItem.quantity + 1 : 1;
-    if (product && product?.countInStock < quantity) {
-      window.alert('Sorry. Product is out of stock');
-      return;
+    const { data } = await axios.get(`/api/products/${product._id}`);
+    if (data.countInStock < quantity) {
+      return toast.error('Sorry. Product is out of stock');
     }
     dispatch({
       type: Types.CART_TO_CART,
-      payload: { ...product, quantity: 1 },
+      payload: { ...product, quantity: quantity },
     });
+    toast.success('Product added to the cart');
   };
 
   return (
     <div className="card">
       <Link href={`/product/${product.slug}`}>
         <a>
-          {/* TODO: change img to next/image component */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            loading="lazy"
+          <Image
             src={product.image}
             alt={product.name}
             className="rounded shadow object-cover h-64 w-full"
+            loading="lazy"
+            layout="responsive"
+            height={300}
+            width={300}
+            placeholder="blur"
+            blurDataURL={product.image}
           />
         </a>
       </Link>
