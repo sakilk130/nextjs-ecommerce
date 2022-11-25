@@ -29,6 +29,19 @@ export const reducer = (state: InitialStateType, action: any) => {
         ...state,
         cart: {
           cartItems: [],
+          shippingAddress: {},
+        },
+      };
+    }
+    case Types.SAVE_SHIPPING_ADDRESS: {
+      return {
+        ...state,
+        cart: {
+          ...state.cart,
+          shippingAddress: {
+            ...state.cart.shippingAddress,
+            ...action.payload,
+          },
         },
       };
     }
