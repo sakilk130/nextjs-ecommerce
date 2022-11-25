@@ -1,22 +1,44 @@
+import Cookies from 'js-cookie';
+import { useRouter } from 'next/router';
+import { useContext, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import CheckoutSteps from '../../components/checkout-steps';
 import Layout from '../../components/layout';
-
-type Inputs = {
-  fullName: string;
-  address: string;
-  city: string;
-  postalCode: string;
-  country: string;
-};
+import { AppContext } from '../../context/context';
+import { Types } from '../../context/type';
+import { IShippingAddress } from '../../interface';
 
 const Shipping = () => {
+  const { state, dispatch } = useContext(AppContext);
+  const { cart } = state;
+  const { shippingAddress } = cart;
+  const router = useRouter();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Inputs>();
-  const onSubmit = (data: any) => console.log(data);
+    setValue,
+  } = useForm<IShippingAddress>();
+  const onSubmit = (data: any) => {
+    dispatch({ type: Types.SAVE_SHIPPING_ADDRESS, payload: data });
+    Cookies.set(
+      'cart',
+      JSON.stringify({
+        ...cart,
+        shippingAddress: data,
+      })
+    );
+
+    router.push('/payment');
+  };
+
+  useEffect(() => {
+    setValue('fullName', shippingAddress?.fullName);
+    setValue('address', shippingAddress?.address);
+    setValue('city', shippingAddress?.city);
+    setValue('postalCode', shippingAddress?.postalCode);
+    setValue('country', shippingAddress?.country);
+  }, [setValue, shippingAddress]);
 
   return (
     <Layout title="Shipping">
@@ -126,4 +148,5 @@ const Shipping = () => {
   );
 };
 
+Shipping.auth = true;
 export default Shipping;

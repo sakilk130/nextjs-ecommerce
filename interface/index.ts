@@ -10,3 +10,11 @@ export interface IProduct {
   countInStock: number;
   description: string;
 }
+
+export interface IShippingAddress {
+  fullName: string;
+  address: string;
+  city: string;
+  postalCode: string;
+  country: string;
+}

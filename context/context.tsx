@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
 import { createContext, useReducer } from 'react';
-import { IProduct } from '../interface';
+import { IProduct, IShippingAddress } from '../interface';
 import { reducer } from './reducer';
 
 export interface ICard extends IProduct {
@@ -10,13 +10,15 @@ export interface ICard extends IProduct {
 export type InitialStateType = {
   cart: {
     cartItems: ICard[];
+    shippingAddress: IShippingAddress;
+    paymentMethod: string;
   };
 };
 
-const initialState = {
+const initialState: InitialStateType = {
   cart: Cookies.get('cart')
     ? JSON.parse(Cookies.get('cart') || '')
-    : { cartItems: [] },
+    : { cartItems: [], shippingAddress: {}, paymentMethod: '' },
 };
 
 export const AppContext = createContext<{
