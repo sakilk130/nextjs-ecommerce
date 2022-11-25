@@ -30,6 +30,7 @@ export const reducer = (state: InitialStateType, action: any) => {
         cart: {
           cartItems: [],
           shippingAddress: {},
+          paymentMethod: '',
         },
       };
     }
@@ -42,6 +43,15 @@ export const reducer = (state: InitialStateType, action: any) => {
             ...state.cart.shippingAddress,
             ...action.payload,
           },
+        },
+      };
+    }
+    case Types.SAVE_PAYMENT_METHOD: {
+      return {
+        ...state,
+        cart: {
+          ...state.cart,
+          paymentMethod: action.payload,
         },
       };
     }

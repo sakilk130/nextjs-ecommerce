@@ -11,6 +11,7 @@ export type InitialStateType = {
   cart: {
     cartItems: ICard[];
     shippingAddress: IShippingAddress;
+    paymentMethod: string;
   };
 };
 
