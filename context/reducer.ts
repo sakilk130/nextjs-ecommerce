@@ -55,6 +55,9 @@ export const reducer = (state: InitialStateType, action: any) => {
         },
       };
     }
+    case Types.CART_CLEAR_ITEMS: {
+      return { ...state, cart: { ...state.cart, cartItems: [] } };
+    }
     default:
       return state;
   }
