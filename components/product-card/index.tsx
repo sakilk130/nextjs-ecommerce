@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { NextPage } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useContext } from 'react';
 import { toast } from 'react-toastify';
@@ -30,16 +29,12 @@ const ProductCard: NextPage<any> = ({ product }) => {
     <div className="card">
       <Link href={`/product/${product.slug}`}>
         <a>
-          <Image
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
             src={product.image}
             alt={product.name}
             className="rounded shadow object-cover h-64 w-full"
             loading="lazy"
-            layout="responsive"
-            height={300}
-            width={300}
-            placeholder="blur"
-            blurDataURL={product.image}
           />
         </a>
       </Link>
