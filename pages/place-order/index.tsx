@@ -187,5 +187,5 @@ const PlaceOrder = () => {
     </Layout>
   );
 };
-
+PlaceOrder.auth = true;
 export default PlaceOrder;
