@@ -41,7 +41,18 @@ const Layout: NextPage<ILayout> = ({ title, children }) => {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="description" content="E-commerce" />
       </Head>
-      <ToastContainer position="bottom-center" limit={1} />
+      <ToastContainer
+        position="bottom-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <div className="flex min-h-screen flex-col justify-between ">
         <header className="shadow-md">
           <nav className="flex justify-between gap-3 p-5">
