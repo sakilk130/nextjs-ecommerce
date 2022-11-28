@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
 import axios from 'axios';
 import Image from 'next/image';
@@ -18,7 +19,6 @@ interface OrderAction {
   payload?: any;
 }
 
-// eslint-disable-next-line no-unused-vars
 enum Types {
   ORDER_REQUEST = 'ORDER_REQUEST',
   ORDER_SUCCESS = 'ORDER_SUCCESS',
