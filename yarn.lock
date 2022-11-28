@@ -1104,6 +1104,28 @@
   resolved "https://registry.yarnpkg.com/@panva/hkdf/-/hkdf-1.0.2.tgz#bab0f09d09de9fd83628220d496627681bc440d6"
   integrity sha512-MSAs9t3Go7GUkMhpKC44T58DJ5KGk2vBo+h1cqQeqlMfdGkxaVB78ZWpv9gYi/g2fa4sopag9gJsNvS8XGgWJA==
 
+"@paypal/paypal-js@^5.0.6":
+  version "5.1.2"
+  resolved "https://registry.yarnpkg.com/@paypal/paypal-js/-/paypal-js-5.1.2.tgz#fa36512eb702a5920aab6cc5551b947ae695241a"
+  integrity sha512-hdJUnAmsmhsZ1D4WgWg3Q7cpoUZ3Xxrr2LMREsOZVAARNVtzoy1ZZrDKzvFYEXUyWWDRr45Bc6Ov3yvZidLMrA==
+  dependencies:
+    promise-polyfill "^8.2.3"
+
+"@paypal/react-paypal-js@^7.8.1":
+  version "7.8.1"
+  resolved "https://registry.yarnpkg.com/@paypal/react-paypal-js/-/react-paypal-js-7.8.1.tgz#ab5b62240552cf38ff4782c4925ef4d99a8bf444"
+  integrity sha512-+cAa0QLJUO1TUlFk/xqJsfEm6Ywtg3kvMmxf2EJcmVJDkNHc6+7Qq2o6Gt1mTn16ZG4/2uWRROeKcoXFFdNrQA==
+  dependencies:
+    "@paypal/paypal-js" "^5.0.6"
+    "@paypal/sdk-constants" "^1.0.116"
+
+"@paypal/sdk-constants@^1.0.116":
+  version "1.0.127"
+  resolved "https://registry.yarnpkg.com/@paypal/sdk-constants/-/sdk-constants-1.0.127.tgz#1b3f2a2a70f07654bfbe30c0af6920c66af43577"
+  integrity sha512-6T/HpO1RiQtVC/VSz1lLJJNroq9AxJbejzp+EnFoqu30lmSp9EUrogxyfGkMpZUxZNSxBJy9gCcUOgHbJ8yd3A==
+  dependencies:
+    hi-base32 "^0.5.0"
+
 "@rushstack/eslint-patch@^1.1.3":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@rushstack/eslint-patch/-/eslint-patch-1.2.0.tgz#8be36a1f66f3265389e90b5f9c9962146758f728"
@@ -2479,6 +2501,11 @@ has@^1.0.3:
   dependencies:
     function-bind "^1.1.1"
 
+hi-base32@^0.5.0:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/hi-base32/-/hi-base32-0.5.1.tgz#1279f2ddae2673219ea5870c2121d2a33132857e"
+  integrity sha512-EmBBpvdYh/4XxsnUybsPag6VikPYnN30td+vQk+GI3qpahVEG9+gTkG0aXVxTjBqQ5T6ijbWIu77O+C5WFWsnA==
+
 hosted-git-info@^2.1.4:
   version "2.8.9"
   resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.8.9.tgz#dffc0bf9a21c02209090f2aa69429e1414daf3f9"
@@ -3404,6 +3431,11 @@ pretty-format@^3.8.0:
   version "3.8.0"
   resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-3.8.0.tgz#bfbed56d5e9a776645f4b1ff7aa1a3ac4fa3c385"
   integrity sha512-WuxUnVtlWL1OfZFQFuqvnvs6MiAGk9UNsBostyBOB0Is9wb5uRESevA6rnl/rkksXaGX3GzZhPup5d6Vp1nFew==
+
+promise-polyfill@^8.2.3:
+  version "8.2.3"
+  resolved "https://registry.yarnpkg.com/promise-polyfill/-/promise-polyfill-8.2.3.tgz#2edc7e4b81aff781c88a0d577e5fe9da822107c6"
+  integrity sha512-Og0+jCRQetV84U8wVjMNccfGCnMQ9mGs9Hv78QFe+pSDD3gWTpz0y+1QCuxy5d/vBFuZ3iwP2eycAkvqIMPmWg==
 
 prop-types@^15.8.1:
   version "15.8.1"
